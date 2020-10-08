@@ -3,6 +3,7 @@ zygote
 入口文件app_main.cpp，
 
 ```c++
+frameworks/base/cmds/app_process/app_main.cpp
 int main(int argc, char* const argv[])
 {
   .......

@@ -1,6 +1,6 @@
 SystemServer
 
-SystemServer是由Zygote fork出的一个进程，Zygote在forkSystemServer()方法中必须检查生成的SystemServer进程工作是否正常。而运行普通android应用程序时，只是负责创建应用程序进程，至于进程是否创建成功并不检查。
+SystemServer是由Zygote fork出的一个进程，Zygote在forkSystemServer()方法中必须检查生成的SystemServer进程工作是否正常。而运行普通android应用程序时，只是负责创建应用程序进程，至于进程是否创建成功并不检查，而SystemServer会启动AMS等重要服务（不要跟ServiceManager搞混，SM管理进程服务，所有的binder需要注册到SM，也可以在SM中获取到）
 
 并启动main方法
 
@@ -309,4 +309,12 @@ frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.
     }
   .........
 ```
+
+
+
+## Activity的启动
+
+先看下发起者：在Activity中调用startActivity方法会经过Instrumentation.execStartActivity，ActivityManagerServer.startActivity, AMS的调用时跨进程的；具体的调用过程可以参考https://www.cnblogs.com/limingblogs/p/13261701.html
+
+
 
